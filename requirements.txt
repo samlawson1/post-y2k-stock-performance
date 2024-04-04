@@ -3,3 +3,4 @@ numpy
 pyspark
 dbt-core
 selenium
+beautifulsoup4
