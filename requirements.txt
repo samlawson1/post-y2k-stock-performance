@@ -2,5 +2,4 @@ pandas
 numpy
 pyspark
 dbt-core
-selenium
-beautifulsoup4
+nasdaq-data-link
