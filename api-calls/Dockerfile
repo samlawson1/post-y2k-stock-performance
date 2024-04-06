@@ -1,5 +1,6 @@
 FROM python:3.10
 RUN python -m env .
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN MKDIR -p {python-files, source_data}
 COPY python-files\* python-files\*
