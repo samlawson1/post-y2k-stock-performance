@@ -2,3 +2,5 @@ pandas
 numpy
 nasdaq-data-link
 pyarrow
+jupyter
+notebook
