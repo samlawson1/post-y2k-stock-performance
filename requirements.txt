@@ -3,3 +3,4 @@ numpy
 pyspark
 dbt-core
 nasdaq-data-link
+pyarrow
