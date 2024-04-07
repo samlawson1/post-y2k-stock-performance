@@ -164,6 +164,8 @@ cython_debug/
 data/
 DATA/
 Data/
+Include/
+
 
 # other folders
 share/
