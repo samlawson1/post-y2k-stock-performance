@@ -1,4 +1,2 @@
 dbt-core
-pandas
-numpy
-pyspark
+dbt-postgres
