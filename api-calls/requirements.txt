@@ -1,8 +1,0 @@
-pandas
-numpy
-nasdaq-data-link
-pyarrow
-jupyter
-notebook
-sqlalchemy
-psycopg2
