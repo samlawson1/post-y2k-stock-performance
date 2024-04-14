@@ -1,0 +1,11 @@
+FROM python:3.10
+COPY ["requirements.txt", "daily_prices_call.py", "nasdaq_api_call.py", "./"]
+RUN pip install -r requirements.txt
+#Argument for user to input API key needed to use the nasdaq-data-link api
+ARG API_KEY=USER_API_KEY
+ENV NASDAQ_DATA_LINK_API_KEY=${API_KEY}
+RUN echo "THE NASDAQ_DATA_LINK_API_KEY is ${API_KEY}"
+#Create environment variable for postgres db connection string
+ENV STOCK_DB_CONN="postgresql+psycopg2://postgres:postgres@localhost/StockDB"
+#Run the daily_prices_call.py file to get updated wiki prices
+CMD ["python", "daily_prices_call.py"]
