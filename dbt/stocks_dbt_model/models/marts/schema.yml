@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stocks_dbt_model
+    description: "Data model for S&P 500 Stocks"
+    database: StockDB
+    schema: NASDAQ
+    tables:
+      - name: ticker_daily_prices
+        description: "Fact table for daily stock prices"
+        columns: 
+        - name: historical_id
+          description: "Primary Key"
+          constraints:
+            - type: primary_key
+            - type: not_null
+          tests:
+            - unique
+            - not_null
+        - name: ticker_id
+          description: "Foreign Key to NASDAQ.s_and_p_500_history.ticker_id"
+          constraints:
+            - type: foreign_key
+              expression: "NASDAQ.s_and_p_500_history.ticker_id"
+
+sources:
+  - name: landing
+    schema: LANDINGS
+    database: StockDB
+    tables:
+      - name: wiki_prices_api
+      - name: zacks_fc_api
+  - name: nasdaq
+    schema: NASDAQ
+    database: StockDB
+    tables:
+      - name: s_and_p_500_history
+      - name: ticker_daily_prices
+
