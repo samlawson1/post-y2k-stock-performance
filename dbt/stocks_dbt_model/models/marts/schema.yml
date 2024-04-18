@@ -22,6 +22,20 @@ models:
           constraints:
             - type: foreign_key
               expression: "NASDAQ.s_and_p_500_history.ticker_id"
+      - name: ticker_earnings_reports
+        description: "Fact table for quarterly earnings reports"
+        columns:
+          - name: report_id
+            description: "Primary Key"
+            constraints:
+              - type: primary_key
+              - type: not_null
+          - name: ticker_id
+            description: "Foreign Key to NASDAQ.s_and_p_500_history.ticker_id"
+            constraints:
+            - type: foreign_key
+              expression: "NASDAQ.s_and_p_500_history.ticker_id"
+
 
 sources:
   - name: landing
@@ -36,4 +50,5 @@ sources:
     tables:
       - name: s_and_p_500_history
       - name: ticker_daily_prices
+      - name: ticker_earnings_reports
 
