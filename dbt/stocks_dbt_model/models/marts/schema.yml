@@ -35,6 +35,14 @@ models:
             constraints:
             - type: foreign_key
               expression: "NASDAQ.s_and_p_500_history.ticker_id"
+      - name: ticker_profiles
+        descriptoin: "Dimension table with ticker profile information"
+        columns:
+          - name: ticker_id
+            description: "Primary Key"
+            constraints:
+              - type: primary_key
+              - type: not_null
 
 
 sources:
