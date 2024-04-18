@@ -15,14 +15,18 @@ WITH zacks_profile_info AS(
     bus_state_name AS state,
     bus_post_code AS zip_code,
     country_name AS country
-    FROM {{source('landing', 'zacks_fc_api')}} AS z1
+    FROM {{ref('zacks_fc_api')}} AS z1
     INNER JOIN 
 	(
 		SELECT ticker, MAX(per_end_date) AS per_end_date
-		FROM "NASDAQ".zacks_fc_api
+		FROM {{ref('zacks_fc_api')}}
 		GROUP BY ticker
 	) AS z2
+
 ON z1.ticker = z2.ticker AND z1.per_end_date = z2.per_end_date
+WHERE z1.ticker NOT IN(
+    SELECT ticker FROM "NASDAQ".ticker_profiles
+    )
 )
 
 SELECT 
@@ -40,3 +44,5 @@ FROM
 INNER JOIN zacks_profile_info z
 ON h.ticker = z.ticker
 ORDER BY ticker_id
+
+

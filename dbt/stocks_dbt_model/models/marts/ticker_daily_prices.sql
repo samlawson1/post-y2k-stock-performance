@@ -1,16 +1,14 @@
 {{
     config(
         materialized='incremental',
-        unique_key='historical_id'
+        unique_key = dbt_utils.generate_surrogate_key(['ticker_id', 'date']) 
     )
 }}
 
 SELECT
--- Create primary key for table
-CASE
-    WHEN (SELECT MAX(historical_id) FROM {{source('nasdaq', 'ticker_daily_prices')}}) IS NOT NULL
-    THEN ROW_NUMBER() OVER(ORDER BY p.ticker, p.date) + (SELECT MAX(historical_id) FROM {{source('nasdaq', 'ticker_daily_prices')}})
-    ELSE ROW_NUMBER() OVER(ORDER BY p.ticker, p.date) END AS historical_id
+-- Create surrogate key for table
+{{ dbt_utils.generate_surrogate_key(['ticker_id', 'date'])
+  }} AS historical_id
 ,
 h.ticker_id,
 p.date,
@@ -24,8 +22,11 @@ p.split_ratio,
 p.adj_open,
 p.adj_low,
 p.adj_close,
-p.adj_volume
+p.adj_volume,
+CURRENT_DATE AS insert_date
 FROM {{source('nasdaq', 's_and_p_500_history')}} AS h
 INNER JOIN 
 {{source('landing', 'wiki_prices_api')}} AS p
 ON h.ticker = p.ticker
+
+LIMIT 100
