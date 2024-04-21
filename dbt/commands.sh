@@ -1,0 +1,2 @@
+dbt deps
+dbt run
