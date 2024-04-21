@@ -28,5 +28,3 @@ FROM {{source('nasdaq', 's_and_p_500_history')}} AS h
 INNER JOIN 
 {{source('landing', 'wiki_prices_api')}} AS p
 ON h.ticker = p.ticker
-
-LIMIT 100
