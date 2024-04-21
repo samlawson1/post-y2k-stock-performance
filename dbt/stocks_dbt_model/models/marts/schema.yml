@@ -8,18 +8,53 @@ models:
     tables:
       - name: ticker_daily_prices
         description: Fact table for daily stock prices
+        columns:
+        - name: historical_id
+          tests:
+            - primary_key
+            - not_null
       - name: ticker_earnings_reports
         description: Fact table for earnings reports
+        columns:
+          - name: report_id
+            test:
+              - primary_key
+              - not_null
       - name: s_and_p_500_history
         description: Fact table containing all tickers historically listed in S&P 500
+        columns:
+          - name: ticker_id
+            test:
+              - primary_key
+              - not_null
       - name: ticker_profiles
         description: Dimension table with ticker profile information
+        columns:
+          - name: ticker_id
+            test:
+              - primary_key
+              - not_null
       - name: industry_codes
         description: Dimension table wih Zacks/FC industry codes for each ticker
+        columns:
+          - name: exp_industry_code
+            test:
+              - primary_key
+              - not_null
       - name: sector_codes
         description: Dimension table with Zacks/FC expanded sector codes for each ticker
+        columns:
+          - name: sector_code
+            test:
+              - primary_key
+              - not_null
       - name: zacks_fc_api
         description: API resposne + Generated Surrogate Key
+        columns:
+          - name: report_id
+            test:
+              - primary_key
+              - not_null
       - name: wiki_prices_api
         description: API response
 
