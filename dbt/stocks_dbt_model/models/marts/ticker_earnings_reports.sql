@@ -27,4 +27,4 @@ INNER JOIN
 {{source('nasdaq', 's_and_p_500_history')}} AS h 
 ON z.ticker = h.ticker
 
-LIMIT 100
+
