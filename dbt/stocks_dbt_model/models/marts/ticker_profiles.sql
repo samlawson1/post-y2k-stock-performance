@@ -24,11 +24,7 @@ WITH zacks_profile_info AS(
 	) AS z2
     ON z1.ticker = z2.ticker AND z1.per_end_date = z2.per_end_date
 )
-/*
-WHERE z1.ticker NOT IN(
-    SELECT ticker FROM "NASDAQ".ticker_profiles
-    )
-*/
+
 
 
 SELECT 
