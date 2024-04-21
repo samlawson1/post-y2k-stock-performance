@@ -17,6 +17,3 @@ SELECT
 CURRENT_DATE AS insert_date
 FROM
 {{source('landing', 'zacks_fc_api')}}
-
-
-LIMIT 100
