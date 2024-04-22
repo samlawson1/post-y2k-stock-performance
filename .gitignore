@@ -166,7 +166,8 @@ DATA/
 Data/
 Include/
 
-
+# Docker Compose
+docker-compose.yaml
 
 
 # other folders
